@@ -4,7 +4,7 @@
 pub fn greet(name: &str) -> String {
     // &str ist eine Referenz auf str, einen Typ mit zur Compile-Zeit unbekannter Länge
     // TODO: return "Hello, <name>!"
-    "Hello, " + name
+    format!("Hello, {}!", name)
 }
 
 pub fn sum(nums: &[i32]) -> i32 {
@@ -18,7 +18,7 @@ pub fn sum(nums: &[i32]) -> i32 {
 
 pub fn flip(b: bool) -> bool {
     // TODO: return the opposite boolean
-    b = !b
+    !b
 }
 
 // ---------- 2. OWNERSHIP & BORROWING ----------
@@ -49,7 +49,7 @@ pub struct Point {
 impl Point {
     pub fn distance_to(&self, other: &Point) -> f64 {
         // TODO: Euclidean distance
-        todo!()
+        ((other.x - self.x) * (other.x - self.x) + (other.y - self.y) * (other.y - self.y)).sqrt()
     }
 
     pub fn origin() -> Self {
@@ -66,7 +66,10 @@ pub enum Shape {
 impl Shape {
     pub fn area(&self) -> f64 {
         // TODO: match on self, compute area
-        todo!()
+        match self {
+            Shape::Circle {center, radius} => (radius * radius) * std::f64::consts::PI
+            Shape::Rect {top_left, w, h} => w * h
+        }
     }
 }
 
