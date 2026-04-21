@@ -116,7 +116,7 @@ pub fn parse_port(s: &str) -> Result<u16, String> {
 pub fn even_squares(n: u32) -> Vec<u32> {
     // TODO: all even numbers from 0..=n, squared, collected to Vec
     // hint: (0..=n).filter(...).map(...).collect()
-    todo!()
+    (0..=n).filter(|x| x % 2 == 0).map(|x| x * x).collect()
 }
 
 // ---------- 7. USING A CRATE (rand) ----------
