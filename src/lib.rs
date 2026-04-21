@@ -94,7 +94,7 @@ impl Plottable for (f64, f64) {
 pub fn furthest_from_origin<T: Plottable>(items: &[T]) -> Option<&T> {
     // TODO: iterate, compute squared distance, track max, return reference
     let mut max_dist: f64 = 0.0;
-    let mut result: Option<&T> = None ;
+    let mut result: Option<&T> = None;
     for item in items {
         let distance = item.x() * item.x() + item.y() * item.y();
         if distance > max_dist {
@@ -109,7 +109,7 @@ pub fn furthest_from_origin<T: Plottable>(items: &[T]) -> Option<&T> {
 pub fn parse_port(s: &str) -> Result<u16, String> {
     // TODO: parse string into u16; map errors into a friendly String
     // hint: use s.parse::<u16>()
-    todo!()
+    s.parse::<u16>().map_err(|e| e.to_string())
 }
 
 // ---------- 6. ITERATORS & CLOSURES ----------
