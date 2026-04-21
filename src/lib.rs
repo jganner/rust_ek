@@ -67,8 +67,8 @@ impl Shape {
     pub fn area(&self) -> f64 {
         // TODO: match on self, compute area
         match self {
-            Shape::Circle {center, radius} => (radius * radius) * std::f64::consts::PI
-            Shape::Rect {top_left, w, h} => w * h
+            Shape::Circle {center, radius} => (radius * radius) * std::f64::consts::PI,
+            Shape::Rect {top_left, w, h} => w * h,
         }
     }
 }
@@ -93,7 +93,16 @@ impl Plottable for (f64, f64) {
 // Note the explicit lifetime tying the returned reference to the input slice.
 pub fn furthest_from_origin<T: Plottable>(items: &[T]) -> Option<&T> {
     // TODO: iterate, compute squared distance, track max, return reference
-    todo!()
+    let mut max_dist: f64 = 0.0;
+    let mut result: Option<&T> = None ;
+    for item in items {
+        let distance = item.x() * item.x() + item.y() * item.y();
+        if distance > max_dist {
+            max_dist = distance;
+            result = Some(item);
+        }
+    }
+    result
 }
 
 // ---------- 5. ERRORS & OPTION/RESULT ----------
