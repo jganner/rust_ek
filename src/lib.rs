@@ -2,18 +2,23 @@
 
 // ---------- 1. BASICS ----------
 pub fn greet(name: &str) -> String {
+    // &str ist eine Referenz auf str, einen Typ mit zur Compile-Zeit unbekannter Länge
     // TODO: return "Hello, <name>!"
-    todo!()
+    "Hello, " + name
 }
 
 pub fn sum(nums: &[i32]) -> i32 {
     // TODO: sum all elements using an iterator
-    todo!()
+    let mut sum: i32 = 0; //es ist mit neu das eine variable per defualt nicht änderbar ist und man daher mut verwenden mumss und dass
+    for element in nums {
+        sum += element;
+    }
+    sum
 }
 
 pub fn flip(b: bool) -> bool {
     // TODO: return the opposite boolean
-    todo!()
+    b = !b
 }
 
 // ---------- 2. OWNERSHIP & BORROWING ----------
