@@ -55,6 +55,14 @@ pub struct Point {
     pub y: f64,
 }
 
+use std::fmt; // fmt Modul importieren -> "import java.util...."
+
+impl fmt::Display for Point { // Display = was bei {} in println! ausgegeben wird (Debug wäre {:?})
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result { // Pflichtmethode von Display
+        write!(f, "({}, {})", self.x, self.y) // wie println! aber in f schreiben statt Konsole, kein ; = Rückgabewert
+    }
+}
+
 impl Point { // impl = Methoden für Point definieren
     pub fn distance_to(&self, other: &Point) -> f64 {
         // &self = Methode borgt sich die Instanz (kein Ownership) "this" in Java
@@ -66,11 +74,16 @@ impl Point { // impl = Methoden für Point definieren
         Self { x: 0.0, y: 0.0 }
     }
 }
-
+// #[derive(...)] lässt den Compiler automatisch Traits implementieren:
+// Debug    → erlaubt {:?} in println! für Debugging
+// Clone    → erlaubt .clone() für explizite Kopien
+// Copy     → Typ wird automatisch kopiert statt gemoved (für kleine Typen)
+// PartialEq→ erlaubt == und != Vergleiche
 #[derive(Debug, Clone, Copy, PartialEq)]
 pub enum Shape { // enum kann Daten enthalten
     Circle { center: Point, radius: f64 },
     Rect { top_left: Point, w: f64, h: f64 },
+    Triangle { a: Point, b: Point, c: Point },
 }
 
 impl Shape {
@@ -78,6 +91,9 @@ impl Shape {
         match self { // match -> switch case
             Shape::Circle { center, radius } => (radius * radius) * std::f64::consts::PI,
             Shape::Rect { top_left, w, h } => w * h,
+            Shape::Triangle { a, b, c } => {
+                ((a.x * (b.y - c.y) + b.x * (c.y - a.y) + c.x * (a.y - b.y)) / 2.0).abs()
+            }
         }
     }
 }

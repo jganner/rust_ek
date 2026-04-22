@@ -14,3 +14,15 @@ fn structs_enums_methods() {
     assert!((r.area() - 12.0).abs() < 1e-9);
 }
 
+#[test]
+fn distance_to_negative_coords() {
+    let a = Point { x: -3.0, y: -4.0 };
+    let b = Point { x: 0.0, y: 0.0 };
+    assert!((a.distance_to(&b) - 5.0).abs() < 1e-9);
+}
+
+#[test]
+fn area_rect_square() {
+    let r = Shape::Rect { top_left: Point::origin(), w: 5.0, h: 5.0 };
+    assert!((r.area() - 25.0).abs() < 1e-9);
+}
